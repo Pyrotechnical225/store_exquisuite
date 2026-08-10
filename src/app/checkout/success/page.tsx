@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function SuccessPage() { return <section className="shell success"><div className="success-mark">✓</div><p className="eyebrow dark">Order confirmed</p><h1>Thank you for your order.</h1><p>Your secure payment was received. Stripe will send the receipt to your email address, and we’ll prepare your order for UK delivery.</p><Link className="button" href="/">Continue shopping</Link></section>; }
