@@ -12,6 +12,7 @@ export async function POST(request: Request) {
   const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   const stripe = getStripe();
   const session = await stripe.checkout.sessions.create({
+    integration_identifier: "exquisuite_hqmvzsjt",
     mode: "payment",
     customer_email: user?.primaryEmailAddress?.emailAddress,
     line_items: [
