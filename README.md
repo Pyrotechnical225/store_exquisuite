@@ -14,7 +14,7 @@ A production-oriented UK fashion storefront built with Next.js 16, Clerk authent
 ## Setup
 
 1. Install dependencies with `npm install`.
-2. Copy `.env.example` to `.env.local` and add the real development credentials.
+2. Copy `.env.example` to `.env.local` and add development credentials. Prefer a least-privilege Stripe restricted key (`rk_test_...`).
 3. Run `database/schema.sql` against the Neon database.
 4. Register `/api/webhooks/stripe` as a Stripe webhook for `checkout.session.completed`.
 5. Run `npm run dev`.
