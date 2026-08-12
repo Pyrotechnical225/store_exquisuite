@@ -1,11 +1,14 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-const isProtected = createRouteMatcher(["/cart(.*)", "/account(.*)", "/api/cart(.*)", "/api/checkout(.*)"]);
-
-export default clerkMiddleware(async (auth, request) => {
-  if (isProtected(request)) await auth.protect();
-}, { frontendApiProxy: { enabled: true } });
+// Authentication is enforced in the page and route handler that reads or
+// mutates customer data. Keeping the proxy focused on Clerk session context
+// avoids coupling the whole storefront to an optional Frontend API proxy.
+export default clerkMiddleware();
 
 export const config = {
-  matcher: ["/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|webmanifest)).*)", "/(api|trpc)(.*)"],
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+    "/__clerk/(.*)",
+  ],
 };
